@@ -1,68 +1,41 @@
-#CXX=g++
-#
-#OBJDIR=obj
-#OUTDIR=out
-#
-#CXXFLAGS+=-Wall
-#LDFLAGS=-Wl,-O1,-s -lSDL
-#
-#OUTPUT=out/wonder
-#
-#SOURCES=src/main.cpp
-#SOURCES+=src/pixel.cpp
-#SOURCES+=src/display.cpp
-#SOURCES+=src/frame.cpp
-#SOURCES+=src/rasterizer.cpp
-#
-#OBJECTS=$(addprefix $(OBJDIR)/, $(SOURCES:.cpp=.o))
-#
-#all: $(OUTPUT)
-#
-#$(OUTPUT): $(OBJECTS)
-#	$(CXX) $(LDFLAGS) -o $@ $^
-#
-#$(OBJDIR):
-#	mkdir -p $@
-#
-#$(OBJDIR)/%.o: %.cpp | $(OBJDIR) 
-#	mkdir -p $(dir $@)
-#	$(CXX) $(CXXFLAGS) -c -o $@ $<
-#
-#clean:
-#	rm -rf $(OBJDIR)
-#
-CC=g++
+NAME     = graphics
+CC       = g++
 
-CFLAGS+=-Wall
-CFLAGS+=-Weffc++
-CFLAGS+=-pedantic
-CFLAGS+=-ggdb
-CFLAGS+=-O0
+SRCDIR   = src
+OBJDIR   = obj
+BINDIR   = bin
+
+SRC+=src/main.cpp
+SRC+=src/pixel.cpp
+SRC+=src/display.cpp
+SRC+=src/frame.cpp
+SRC+=src/rasterizer.cpp
+
+SRCDIRS = $(sort $(dir $(SRC)))
+OBJ     = $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRC))
+
+CFLAGS  = -Wall -Weffc++ -pedantic -ggdb -O0
 #CFLAGS+=-DNDEBUG
 
-LDFLAGS+=-lSDL
+LDFLAGS = -lSDL
 
-SOURCES+=src/main.cpp
-SOURCES+=src/pixel.cpp
-SOURCES+=src/display.cpp
-SOURCES+=src/frame.cpp
-SOURCES+=src/rasterizer.cpp
+all: $(BINDIR)/$(NAME)
 
-OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=out/wonder
-OBJDIR=obj
+$(BINDIR)/$(NAME): $(OBJDIR)/$(SRCDIRS) $(OBJ) 
+	mkdir -p $(dir $@)
+	$(CC) $(OBJ) $(LDFLAGS) -o $@
 
-all: $(EXECUTABLE)
-	
-$(EXECUTABLE): $(OBJECTS)
-	$(CC) $(LDFLAGS) $(addprefix $(OBJDIR)/, $(notdir $(OBJECTS))) -o $@
-
-%.o: %.cpp 
-	$(CC) $(CFLAGS) $< -c -o $(OBJDIR)/$(@F) 
+$(OBJDIR)/%.o: %.cpp
+	$(CC) -MM -MF $(subst .o,.d,$@) -MP -MT $@ $(CFLAGS) -c $<
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(EXECUTABLE)
-	rm -f $(addprefix $(OBJDIR)/, $(notdir $(OBJECTS)))
+	$(RM) -r $(OBJDIR)
 
-$(OBJDIR)/main.o: src/main.cpp 
-$(OBJDIR)/pixel.o: src/pixel.cpp pixel.h 
+$(OBJDIR)/$(SRCDIRS):
+	mkdir -p $@
+
+distclean: clean
+	$(RM) -r $(BINDIR)
+
+.PHONY: all clean distclean
