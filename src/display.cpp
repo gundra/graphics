@@ -28,10 +28,9 @@ void Display::render(Frame& frame)
 	SDL_LockSurface(m_screen);
 
 	for (int x=0; x<m_width; ++x)
-	{
 		for (int y=0; y<m_height; ++y)
-			((uint32_t*)m_screen->pixels)[y * m_width + x] = frame.getPixel(x,y).toInt32();
-	}
+			//((uint32_t*)m_screen->pixels)[y * m_width + x] = frame.getPixel(x,y).toInt32();
+			((uint32_t*)m_screen->pixels)[(m_height-1-y) * m_width + x] = frame.getPixel(x,y).toInt32();
 
 	SDL_UnlockSurface(m_screen);
 

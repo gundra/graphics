@@ -38,4 +38,7 @@ $(OBJDIR)/$(SRCDIRS):
 distclean: clean
 	$(RM) -r $(BINDIR)
 
-.PHONY: all clean distclean
+run: all
+	$(BINDIR)/$(NAME)
+
+.PHONY: all clean distclean run
