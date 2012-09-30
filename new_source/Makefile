@@ -10,6 +10,7 @@ SRC+=src/Display.cpp
 SRC+=src/Rasterizer.cpp
 SRC+=src/Vector3d.cpp
 SRC+=src/Vector4d.cpp
+SRC+=src/Point.cpp
 SRC+=src/Matrix4x4.cpp
 SRC+=src/ApplicationBase.cpp
 SRC+=src/GraphicsApp.cpp
@@ -46,6 +47,7 @@ $(OBJDIR)/$(SRCDIRS):
 
 distclean: clean
 	$(RM) -r $(BINDIR)
+	$(RM) tags
 
 run: all
 	$(BINDIR)/$(NAME)

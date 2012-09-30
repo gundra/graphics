@@ -8,4 +8,8 @@ class Point
         float y;
 };
 
+#include <iostream>
+
+std::ostream& operator << (std::ostream& lhs, const Point& rhs);
+
 #endif /* POINT_H */

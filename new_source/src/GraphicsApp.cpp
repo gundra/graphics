@@ -127,9 +127,9 @@ std::vector<Vector3d> getVertexes()
     vertexes.push_back(Vector3d(1,0,0));
     vertexes.push_back(Vector3d(0,0,1));
 
-    vertexes.push_back(Vector3d(1,0,0));
     vertexes.push_back(Vector3d(1,0,1));
-    vertexes.push_back(Vector3d(0,0,0));
+    vertexes.push_back(Vector3d(1,0,0));
+    vertexes.push_back(Vector3d(0,0,1));
 
     // daaah...
 
@@ -162,8 +162,8 @@ void GraphicsApp::init()
     m_viewMatrix = Matrix4x4(identityMatrix); 
     m_projectionMatrix = Matrix4x4(identityMatrix);
 
-    //swPerspective(projectionMatrix, 60, (float)WIDTH/(float)HEIGHT, 1, 10);
-    swOrtho(m_projectionMatrix, -1, 1, -1, 1, -1, 1);
+    //swPerspective(m_projectionMatrix, 30, (float)getDisplay().getWidth()/(float)getDisplay().getHeight(), 1, 10);
+    swOrtho(m_projectionMatrix, -2, 2, -2, 2, -2, 2);
 }
 
 void GraphicsApp::update(int elapsedTime)
@@ -220,7 +220,7 @@ void GraphicsApp::draw(const Display& dis)
         swViewportf(0,0,dis.getWidth(),dis.getHeight(),p2.x,p2.y);
         swViewportf(0,0,dis.getWidth(),dis.getHeight(),p3.x,p3.y);
 
-        //m_rasterizer.rasterizeTriangle(p1, p2, p3);
-        m_rasterizer.rasterizeLines(p1, p2, p3);
+        m_rasterizer.rasterizeTriangleSolid(p1, p2, p3);
+        //m_rasterizer.rasterizeTriangleLines(p1, p2, p3);
     }
 }
