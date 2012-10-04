@@ -14,6 +14,9 @@ SRC+=src/Point.cpp
 SRC+=src/Matrix4x4.cpp
 SRC+=src/ApplicationBase.cpp
 SRC+=src/GraphicsApp.cpp
+SRC+=src/ModelViewMatrix.cpp
+SRC+=src/ProjectionMatrix.cpp
+SRC+=src/Viewport.cpp
 
 SRCDIRS = $(sort $(dir $(SRC)))
 OBJ     = $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRC))

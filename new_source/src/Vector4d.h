@@ -15,6 +15,7 @@ class Vector4d
         float operator[](const int rhs) const;
 
         Vector4d& operator*=(const float rhs);
+        Vector4d& operator/=(const float rhs);
 
         float computeLength() const;
         Vector4d& normalize();

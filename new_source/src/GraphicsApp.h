@@ -3,8 +3,9 @@
 
 #include "ApplicationBase.h"
 #include "Vector3d.h"
-#include "Matrix4x4.h"
 #include "Rasterizer.h"
+#include "ModelViewMatrix.h"
+#include "ProjectionMatrix.h"
 #include <vector>
 
 class GraphicsApp: public ApplicationBase
@@ -20,9 +21,8 @@ class GraphicsApp: public ApplicationBase
     private:
         std::vector<Vector3d> m_vertexes;
         Rasterizer m_rasterizer;
-        Matrix4x4 m_modelMatrix; 
-        Matrix4x4 m_viewMatrix; 
-        Matrix4x4 m_projectionMatrix;
+        ModelViewMatrix m_modelViewMatrix;
+        ProjectionMatrix m_projectionMatrix;
         Matrix4x4 m_finalMatrix;
 };
 

@@ -1,6 +1,8 @@
 #ifndef MATRIX4X4_H
 #define MATRIX4X4_H
 
+#include "Vector4d.h"
+
 class Matrix4x4
 {
     public:
@@ -24,6 +26,7 @@ class Matrix4x4
 };
 
 Matrix4x4 operator*(const Matrix4x4& lhs, const Matrix4x4& rhs);
+Vector4d operator*(const Matrix4x4& matrix, const Vector4d& vector);
 
 #include <iostream>
 std::ostream& operator << (std::ostream& lhs, Matrix4x4 const& rhs);

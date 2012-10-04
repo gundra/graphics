@@ -78,6 +78,16 @@ Vector4d& Vector4d::operator*=(const float rhs)
     return *this;
 }
 
+Vector4d& Vector4d::operator/=(const float rhs)
+{
+    m_x /= rhs;
+    m_y /= rhs;
+    m_z /= rhs;
+    m_w /= rhs;
+
+    return *this;
+}
+
 float Vector4d::computeLength() const
 {
     // leave w alone?
