@@ -6,6 +6,7 @@ class Point
     public:
         float x;
         float y;
+        float z;
 };
 
 #include <iostream>

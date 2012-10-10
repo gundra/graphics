@@ -2,7 +2,7 @@
 
 int main(int argc, char *argv[])
 {
-    GraphicsApp app(320, 240);
+    GraphicsApp app(320, 320);
     app.run();
     
     getchar();
